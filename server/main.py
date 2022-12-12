@@ -9,13 +9,16 @@ def status():
 @app.route('/csv', methods=['POST'])
 def post_csv():
     try:
-        file = request.files['file']
-        file_data = file.read().decode("latin-1")
-        print(file_data)
+        data = request.data
+
+        if data == None:
+            return jsonify({ 'err': 'Empty body data.' })
+
+        print(data.decode('utf-8'))
 
         return jsonify({ 'msg': 'File received.' })
-    except Exception as e:
-        return jsonify({ 'msg': 'File not found.' })
+    except:
+        return jsonify({ 'err': 'Error on request' }) 
 
 if __name__ == '__main__':
     app.run(port=8080)
