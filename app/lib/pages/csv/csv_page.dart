@@ -1,54 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:csv/csv.dart';
 
 import 'package:projeto_ia/models/csv_model.dart';
 
-class CsvPage extends StatefulWidget {
+class CsvPage extends StatelessWidget {
   const CsvPage({super.key});
 
   @override
-  State<CsvPage> createState() => _CsvPageState();
-}
-
-class _CsvPageState extends State<CsvPage> {
-  CsvModel? csv;
-  List<dynamic> _data = [];
-
-  @override
-  void initState() {
-    super.initState();
-
-    loadData();
-  }
-
-  void loadData() async {
-    Future.delayed(const Duration(seconds: 0), () async {
-      final args = ModalRoute.of(context)!.settings.arguments;
-      csv = args as CsvModel;
-
-      final rawData = await rootBundle.loadString("assets/${csv!.file}");
-
-      List<dynamic> listData = const CsvToListConverter().convert(
-        rawData,
-        eol: '\n',
-      );
-
-      setState(() {
-        _data = listData;
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments;
+    final CsvModel csv = args as CsvModel;
+
+    if (csv.data == null) {
+      Future.delayed(const Duration(seconds: 0), () {
+        Navigator.of(context).pushNamedAndRemoveUntil('main', (route) => false);
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(csv?.name ?? ''),
+        title: Text('${csv.name} - ${csv.data!.length} itens'),
       ),
       body: SingleChildScrollView(
         child: Table(
-          children: _data.map((item) {
+          children: csv.data!.map((item) {
             final list = item as List<dynamic>;
             return TableRow(
               children: list.map((e) {

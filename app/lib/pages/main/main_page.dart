@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:projeto_ia/models/csv_model.dart';
+import 'package:projeto_ia/widgets/csv_item.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -14,22 +15,17 @@ class MainPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Início'),
+        title: const Text('Escolha de .csv'),
       ),
       body: ListView.builder(
         itemCount: csvs.length,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: ListTile(
-              title: Text(csvs[index].name),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                Navigator.of(context).pushNamed('csv', arguments: csvs[index]);
-              },
-            ),
-          );
+          return CsvItem(csv: csvs[index]);
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.save),
       ),
     );
   }

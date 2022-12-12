@@ -15,7 +15,6 @@ def post_csv():
 
         return jsonify({ 'msg': 'File received.' })
     except Exception as e:
-        print(e)
         return jsonify({ 'msg': 'File not found.' })
 
 if __name__ == '__main__':
