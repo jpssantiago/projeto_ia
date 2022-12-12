@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:projeto_ia/models/csv_model.dart';
 
@@ -38,6 +40,17 @@ class CsvPage extends StatelessWidget {
             );
           }).toList(),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.send),
+        onPressed: () async {
+          final response = await http.post(
+            Uri.parse('http://localhost:8080/csv'),
+            body: csv.data.toString(),
+          );
+
+          print(response.body);
+        },
       ),
     );
   }
