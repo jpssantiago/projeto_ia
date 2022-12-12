@@ -1,48 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:csv/csv.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
-class MainPage extends StatefulWidget {
+import 'package:projeto_ia/models/csv_model.dart';
+
+class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
   @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  List<List<dynamic>> _data = [];
-
-  void _loadCSV() async {
-    final rawData = await rootBundle.loadString("assets/kindacode.csv");
-    List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
-    setState(() {
-      _data = listData;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final List<CsvModel> csvs = [
+      CsvModel(id: 'iris', name: 'Iris', file: 'iris.csv'),
+      CsvModel(id: 'kindacode', name: 'KindaCode', file: 'kindacode.csv'),
+    ];
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Kindacode.com"),
+        title: const Text('Início'),
       ),
       body: ListView.builder(
-        itemCount: _data.length,
-        itemBuilder: (_, index) {
-          return Card(
-            margin: const EdgeInsets.all(3),
-            color: index == 0 ? Colors.amber : Colors.white,
+        itemCount: csvs.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: ListTile(
-              leading: Text(_data[index][0].toString()),
-              title: Text(_data[index][1]),
-              trailing: Text(_data[index][2].toString()),
+              title: Text(csvs[index].name),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.of(context).pushNamed('csv', arguments: csvs[index]);
+              },
             ),
           );
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _loadCSV,
-        child: const Icon(Icons.add),
       ),
     );
   }
