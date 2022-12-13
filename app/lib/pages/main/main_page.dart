@@ -11,6 +11,8 @@ class MainPage extends StatelessWidget {
     final List<CsvModel> csvs = [
       CsvModel(id: 'iris', name: 'Iris', file: 'iris.csv'),
       CsvModel(id: 'kindacode', name: 'KindaCode', file: 'kindacode.csv'),
+      CsvModel(id: 'wine', name: 'Vinho', file: 'wine.csv'),
+      CsvModel(id: 'adult', name: 'Adult', file: 'adult.csv'),
     ];
 
     return Scaffold(

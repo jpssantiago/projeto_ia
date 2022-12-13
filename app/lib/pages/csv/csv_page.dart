@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:projeto_ia/models/csv_model.dart';
@@ -21,25 +20,6 @@ class CsvPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('${csv.name} - ${csv.data!.length} itens'),
-      ),
-      body: SingleChildScrollView(
-        child: Table(
-          children: csv.data!.map((item) {
-            final list = item as List<dynamic>;
-            return TableRow(
-              children: list.map((e) {
-                return Container(
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    e.toString(),
-                    style: const TextStyle(fontSize: 20.0),
-                  ),
-                );
-              }).toList(),
-            );
-          }).toList(),
-        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.send),
