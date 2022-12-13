@@ -1,4 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:http/http.dart' as http;
+import 'package:csv/csv.dart';
 
 import 'package:projeto_ia/models/csv_model.dart';
 import 'package:projeto_ia/widgets/csv_item.dart';
@@ -15,6 +20,28 @@ class MainPage extends StatelessWidget {
       CsvModel(id: 'adult', name: 'Adult', file: 'adult.csv'),
     ];
 
+    void loadFile() async {
+      FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+      if (result != null) {
+        File file = File(result.files.single.path!);
+
+        List<dynamic> data = const CsvToListConverter().convert(
+          await file.readAsString(),
+          //eol: '\n',
+        );
+
+        final response = await http.post(
+          Uri.parse('http://localhost:8080/csv'),
+          body: data.toString(),
+        );
+
+        print(response.body);
+      } else {
+        // User canceled the picker
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Escolha de .csv'),
@@ -26,8 +53,8 @@ class MainPage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.save),
+        onPressed: loadFile,
+        child: const Icon(Icons.upload),
       ),
     );
   }
