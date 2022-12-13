@@ -3,6 +3,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:csv/csv.dart';
 
 import 'package:projeto_ia/models/csv_model.dart';
+import 'package:projeto_ia/widgets/csv_bottom_sheet/csv_bottom_sheet.dart';
 
 class CsvItem extends StatefulWidget {
   final CsvModel csv;
@@ -47,7 +48,11 @@ class _CsvItemState extends State<CsvItem> {
       subtitle: Text('${_data.length} itens'),
       trailing: const Icon(Icons.chevron_right),
       onTap: () {
-        Navigator.of(context).pushNamed('csv', arguments: widget.csv);
+        showCsvBottomSheet(
+          context: context,
+          onFinish: () {},
+          csv: widget.csv,
+        );
       },
     );
   }
