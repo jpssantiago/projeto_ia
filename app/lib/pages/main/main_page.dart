@@ -5,9 +5,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:csv/csv.dart';
 
 import 'package:projeto_ia/models/csv_model.dart';
-import 'package:projeto_ia/services/api_service.dart';
 import 'package:projeto_ia/widgets/csv_bottom_sheet/csv_bottom_sheet.dart';
 import 'package:projeto_ia/widgets/csv_item/csv_item.dart';
+import 'package:projeto_ia/widgets/snack_bar/snack_bar.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -49,6 +49,19 @@ class MainPage extends StatelessWidget {
       if (result != null) {
         File file = File(result.files.single.path!);
 
+        List<String> split = file.path.split('.');
+        String type = split[split.length - 1];
+
+        if (type != 'csv') {
+          Future.delayed(const Duration(seconds: 0), () {
+            sendSnackBar(
+              context: context,
+              message: 'Somente arquivos .csv são suportados.',
+            );
+          });
+          return;
+        }
+
         List<dynamic> data = const CsvToListConverter().convert(
           await file.readAsString(),
           //eol: '\n',
@@ -58,8 +71,6 @@ class MainPage extends StatelessWidget {
         Future.delayed(const Duration(seconds: 0), () {
           showCsvBottomSheet(context: context, onFinish: () {}, csv: csv);
         });
-      } else {
-        // User canceled the picker
       }
     }
 
