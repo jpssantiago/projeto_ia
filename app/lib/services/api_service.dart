@@ -22,4 +22,16 @@ class ApiService {
 
     return Image.memory(response.bodyBytes).image;
   }
+
+  static Future<ImageProvider> sendRawData(String data, int k) async {
+    final response = await http.post(
+      Uri.parse('http://$url:8080/csv'),
+      body: data,
+      headers: {
+        'k-value': k.toString(),
+      },
+    );
+
+    return Image.memory(response.bodyBytes).image;
+  }
 }
