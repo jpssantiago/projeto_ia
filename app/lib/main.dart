@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         'create_csv': (context) => const CreateCsvPage(),
       },
       initialRoute: 'main',
+      debugShowCheckedModeBanner: false,
     );
   }
 }
