@@ -23,6 +23,5 @@ class View:
         plt.ylabel("Eixo Y")
         plt.title("Agrupamento")
         plt.legend()
-        # plt.show()
         plt.savefig(os.path.join(os.getcwd(), 'outputs', 'output.png'))
         plt.close()

@@ -19,7 +19,7 @@ class Group:
         cols: int = len(self.__mid__)
         rows: int = len(self.__data__)
 
-        new_mid = [0 for x in range(cols)]
+        new_mid = [0 for _ in range(cols)]
 
         for current_data in self.__data__:
             attrs = current_data.get_attrs()

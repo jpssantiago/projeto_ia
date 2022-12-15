@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:projeto_ia/services/api_service.dart';
+import 'package:projeto_ia/widgets/snack_bar/snack_bar.dart';
 
 class CreateCsvPage extends StatefulWidget {
   const CreateCsvPage({super.key});
@@ -133,9 +134,17 @@ class _CreateCsvPageState extends State<CreateCsvPage> {
           child: FilledButton(
             child: child(),
             onPressed: () async {
+              final text = controller.text;
+              if (text.isEmpty || text == '') {
+                sendSnackBar(
+                  context: context,
+                  message: 'O conteúdo do CSV não pode ser nulo.',
+                );
+                return;
+              }
+
               setLoading(true);
 
-              final text = controller.text;
               final image = await ApiService.sendRawData(text, k);
 
               Future.delayed(const Duration(seconds: 0), () {
