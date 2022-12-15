@@ -114,7 +114,7 @@ class _CsvBottomSheetState extends State<CsvBottomSheet> {
           child: const Icon(Icons.remove, size: 30),
           onTap: () {
             setState(() {
-              k -= 1;
+              k = k == 1 ? 1 : k - 1;
             });
           },
         );
@@ -147,7 +147,7 @@ class _CsvBottomSheetState extends State<CsvBottomSheet> {
       }
 
       return Padding(
-        padding: const EdgeInsets.only(top: 15),
+        padding: const EdgeInsets.only(top: 25),
         child: SizedBox(
           height: 50,
           child: Row(
