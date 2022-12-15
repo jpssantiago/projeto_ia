@@ -188,7 +188,7 @@ class _CsvBottomSheetState extends State<CsvBottomSheet> {
               final image = await ApiService.sendCsv(widget.csv.data!, k);
 
               Future.delayed(const Duration(seconds: 0), () {
-                Navigator.of(context).pushNamed('result', arguments: image);
+                Navigator.of(context).pushNamed('scatter', arguments: image);
               });
 
               setLoading(false);

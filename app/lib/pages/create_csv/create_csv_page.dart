@@ -139,7 +139,7 @@ class _CreateCsvPageState extends State<CreateCsvPage> {
               final image = await ApiService.sendRawData(text, k);
 
               Future.delayed(const Duration(seconds: 0), () {
-                Navigator.of(context).pushNamed('result', arguments: image);
+                Navigator.of(context).pushNamed('scatter', arguments: image);
               });
 
               setLoading(false);

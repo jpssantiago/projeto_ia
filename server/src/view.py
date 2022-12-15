@@ -16,7 +16,7 @@ class View:
                 x.append(attrs[0])
                 y.append(attrs[1])
             
-            plt.scatter(x, y, label=f'Grupo {index}')
+            plt.scatter(x, y, label=f'G{index}')
             index += 1
         
         plt.xlabel("Eixo X")

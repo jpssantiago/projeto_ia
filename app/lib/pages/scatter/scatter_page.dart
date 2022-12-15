@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ResultPage extends StatelessWidget {
-  const ResultPage({super.key});
+class ScatterPage extends StatelessWidget {
+  const ScatterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,11 +10,12 @@ class ResultPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Scatter'),
+        title: const Text('Visualização Scatter'),
       ),
       body: Center(
         child: Image(image: image),
       ),
+      backgroundColor: Colors.white,
     );
   }
 }
