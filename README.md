@@ -2,6 +2,14 @@
 
 Repositório de projeto final da disciplina de Inteligência Artificial.
 
+## Integrantes do Grupo:
+```bash
+Gabriel de Souza Queiroz – 125111350275
+João Pedro Gonçalves da Cruz – 125111371160
+João Pedro Terra Santiago – 125111373568
+Wellington dos Santos Costa - 125111362083
+```
+
 ## Primeiros passos & Instalação
 
 Clone este repositório
